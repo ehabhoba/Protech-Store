@@ -7,14 +7,15 @@ interface HeaderProps {
   lang: Language;
   setLang: (lang: Language) => void;
   t: (ar: string, en: string) => string;
+  handleScroll: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ lang, setLang, t }) => {
+export const Header: React.FC<HeaderProps> = ({ lang, setLang, t, handleScroll }) => {
   return (
     <header className="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-3">
         <div className="flex items-center justify-between">
-          <a href="#" className="flex items-center gap-3">
+          <a href="/" onClick={handleScroll} className="flex items-center gap-3">
             <img src={LOGO_URL} alt={t("شعار متجر Protech", "Protech Store Logo")} className="w-14 h-14 object-contain rounded-md" />
             <div>
               <h1 className="text-xl font-extrabold text-gray-900">Protech Store</h1>
@@ -23,10 +24,10 @@ export const Header: React.FC<HeaderProps> = ({ lang, setLang, t }) => {
           </a>
 
           <nav className="hidden lg:flex items-center gap-6">
-            <a href="#products" className="text-sm font-medium text-gray-600 hover:text-sky-600 transition-colors">{t("المنتجات", "Products")}</a>
-            <a href="#reviews" className="text-sm font-medium text-gray-600 hover:text-sky-600 transition-colors">{t("التقييمات", "Reviews")}</a>
-            <a href="#features" className="text-sm font-medium text-gray-600 hover:text-sky-600 transition-colors">{t("المميزات", "Features")}</a>
-            <a href="#faq" className="text-sm font-medium text-gray-600 hover:text-sky-600 transition-colors">{t("الأسئلة", "FAQ")}</a>
+            <a href="/products" onClick={handleScroll} className="text-sm font-medium text-gray-600 hover:text-sky-600 transition-colors">{t("المنتجات", "Products")}</a>
+            <a href="/reviews" onClick={handleScroll} className="text-sm font-medium text-gray-600 hover:text-sky-600 transition-colors">{t("التقييمات", "Reviews")}</a>
+            <a href="/features" onClick={handleScroll} className="text-sm font-medium text-gray-600 hover:text-sky-600 transition-colors">{t("المميزات", "Features")}</a>
+            <a href="/faq" onClick={handleScroll} className="text-sm font-medium text-gray-600 hover:text-sky-600 transition-colors">{t("الأسئلة", "FAQ")}</a>
           </nav>
 
           <div className="flex items-center gap-3">

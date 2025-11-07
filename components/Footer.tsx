@@ -4,9 +4,10 @@ import { LOGO_URL, WHATSAPP_NUMBER, FACEBOOK_PAGE, EMAIL_ADDRESS } from '../cons
 
 interface FooterProps {
   t: (ar: string, en: string) => string;
+  handleScroll: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ t }) => {
+export const Footer: React.FC<FooterProps> = ({ t, handleScroll }) => {
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 grid md:grid-cols-3 gap-8">
@@ -17,8 +18,8 @@ export const Footer: React.FC<FooterProps> = ({ t }) => {
         <div>
           <h5 className="font-semibold text-white mb-3">{t("روابط سريعة", "Quick Links")}</h5>
           <ul className="space-y-2 text-sm">
-            <li><a href="#products" className="text-gray-400 hover:text-white">{t("المنتجات", "Products")}</a></li>
-            <li><a href="#faq" className="text-gray-400 hover:text-white">{t("الأسئلة المتكررة", "FAQ")}</a></li>
+            <li><a href="/products" onClick={handleScroll} className="text-gray-400 hover:text-white">{t("المنتجات", "Products")}</a></li>
+            <li><a href="/faq" onClick={handleScroll} className="text-gray-400 hover:text-white">{t("الأسئلة المتكررة", "FAQ")}</a></li>
           </ul>
         </div>
         <div>

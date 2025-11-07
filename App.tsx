@@ -44,9 +44,26 @@ export default function App() {
     window.open(url, "_blank");
   }, [lang]);
 
+  const handleScroll = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const href = e.currentTarget.getAttribute('href');
+    if (!href) return;
+
+    if (href === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    const targetId = href.startsWith('/') ? href.substring(1) : href;
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
   return (
     <div className="bg-gray-50 min-h-screen text-gray-800">
-      <Header lang={lang} setLang={setLang} t={t} />
+      <Header lang={lang} setLang={setLang} t={t} handleScroll={handleScroll} />
 
       <main>
         {/* Hero Section */}
@@ -67,7 +84,7 @@ export default function App() {
                 <h2 className="text-3xl lg:text-5xl font-extrabold tracking-tight drop-shadow-lg">{t("تقنية أنيقة لحياة عصرية","Elegant Tech for Modern Life")}</h2>
                 <p className="mt-4 max-w-2xl mx-auto text-lg lg:text-xl text-gray-300 drop-shadow">{t("اكتشف أجهزة ذكية فاخرة. السعر مفاجأة عند الطلب.","Discover premium smart devices. Surprise price on order.")}</p>
                 <div className="mt-8 flex justify-center gap-3 flex-wrap">
-                    <a href="#products" className="bg-sky-600 hover:bg-sky-500 transition-colors px-6 py-3 rounded-md font-semibold shadow-lg transform hover:scale-105">{t("تسوّق المجموعة","Shop the Collection")}</a>
+                    <a href="/products" onClick={handleScroll} className="bg-sky-600 hover:bg-sky-500 transition-colors px-6 py-3 rounded-md font-semibold shadow-lg transform hover:scale-105">{t("تسوّق المجموعة","Shop the Collection")}</a>
                     <button onClick={() => openWhatsApp(null)} className="bg-white text-gray-900 hover:bg-gray-200 transition-colors px-6 py-3 rounded-md font-semibold shadow-lg transform hover:scale-105">{t("اطلب عبر WhatsApp","Order via WhatsApp")}</button>
                 </div>
                 <div className="absolute bottom-6 start-1/2 -translate-x-1/2 flex gap-2">
@@ -186,7 +203,7 @@ export default function App() {
         </div>
       </div>
       
-      <Footer t={t} />
+      <Footer t={t} handleScroll={handleScroll} />
 
       <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} openWhatsApp={openWhatsApp} t={t} lang={lang} />
     </div>
