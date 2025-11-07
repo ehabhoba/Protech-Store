@@ -1,0 +1,5 @@
+{
+  "name": "Protech Store",
+  "description": "A premium e-commerce landing page for Protech smart devices, featuring product listings, customer reviews, and direct ordering via WhatsApp. Built with React and Tailwind CSS, with full Arabic and English localization.",
+  "requestFramePermissions": []
+}
